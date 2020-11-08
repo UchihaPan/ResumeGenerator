@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 class ClientProfile(models.Model):
     name = models.CharField(max_length=255,blank=True,default='user')
+    carrer=models.CharField(max_length=255,default='None')
     email = models.EmailField(max_length=255, blank=True,default='user@gmail.com')
     phone = models.CharField(max_length=255,blank=True,default='-')
     objective = models.TextField(max_length=1000)
