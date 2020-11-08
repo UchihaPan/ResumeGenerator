@@ -36,12 +36,14 @@ def resume_generator(request):
 def final(request, id):
     client = ClientProfile.objects.get(id=id)
     template = loader.get_template('resume/index.html')
-    html = template.render({'client':client})
+    html = template.render({'client': client})
     options = {
-        'encoding': 'UTF-8'
+        'page-size': 'Letter',
+        'encoding': "UTF-8",
     }
     pdf = pdfkit.from_string(html, False, options=options)
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment'
     filename = 'resume.pdf'
+    response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
     return response
